@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- AULA 12 — Etapas 3, 4 e 5: Grid responsivo e acabamento. -->
+    <!-- Mantém a estrutura de celular da Etapa 2 e completa as classes de tablet e notebook. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EsToDoList</title>
+    <!-- Estilização exclusivamente por classes Tailwind CSS (CDN). -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<!-- BASE / CELULAR (360px): classes sem prefixo. -->
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+    <!-- Barra superior com título e subtítulo responsivo. -->
+    <header class="bg-indigo-600 text-white">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+            <h1 class="text-xl font-bold">EsToDoList</h1>
+            <!-- TABLET: sm:inline mostra o subtítulo a partir de 640 px. -->
+            <span class="hidden sm:inline text-sm">Organize sua rotina escolar</span>
+        </div>
+    </header>
+
+    <!-- NOTEBOOK: lg:grid-cols-3 cria 3 colunas a partir de 1024 px. -->
+    <main class="max-w-5xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- COLUNA 1: criar, pesquisar e filtrar. -->
+        <!-- ACABAMENTO: sticky só no notebook, com distância superior de 1,5rem. -->
+        <section class="min-w-0 bg-white rounded-xl shadow p-4 space-y-4 lg:sticky lg:top-6 lg:self-start" aria-label="Adicionar e filtrar tarefas">
+            <!-- CELULAR: formulário vertical. TABLET: horizontal. NOTEBOOK: vertical novamente. -->
+            <form class="flex flex-col md:flex-row lg:flex-col gap-3">
+                <!-- ACABAMENTO: ring índigo no foco dos campos. -->
+                <input type="text" placeholder="Nova tarefa" aria-label="Nova tarefa"
+                    class="min-w-0 md:flex-1 lg:flex-none w-full border rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <input type="date" aria-label="Data da tarefa"
+                    class="min-w-0 md:w-44 md:flex-none lg:w-full border rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <!-- ACABAMENTO: transition suaviza o hover. -->
+                <button type="submit"
+                    class="sm:flex-none lg:w-full bg-indigo-600 text-white rounded-lg px-4 py-3 font-semibold hover:bg-indigo-700 transition">
+                    Adicionar
+                </button>
+            </form>
+
+            <input type="search" placeholder="Pesquisar tarefa..." aria-label="Pesquisar tarefa"
+                class="w-full min-w-0 border rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+
+            <!-- CELULAR: filtros com rolagem interna. NOTEBOOK: quebram linhas. -->
+            <div class="flex gap-2 overflow-x-auto lg:flex-wrap lg:overflow-visible" aria-label="Filtros de tarefas">
+                <button type="button" class="px-4 py-3 rounded-full bg-indigo-600 text-white whitespace-nowrap">Todas</button>
+                <button type="button" class="px-4 py-3 rounded-full bg-slate-200 whitespace-nowrap">Pendentes</button>
+                <button type="button" class="px-4 py-3 rounded-full bg-slate-200 whitespace-nowrap">Concluídas</button>
+            </div>
+        </section>
+
+        <!-- COLUNA 2: lista ocupa 2 das 3 colunas no notebook. -->
+        <section class="min-w-0 lg:col-span-2" aria-label="Lista de tarefas">
+            <ul class="space-y-3">
+                <!-- TABLET: itens em uma linha; no celular ficam empilhados. -->
+                <li class="bg-white rounded-xl shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <label class="flex items-start gap-3 min-w-0">
+                        <input type="checkbox" class="mt-1 w-5 h-5 shrink-0">
+                        <span class="min-w-0">
+                            <span class="block font-medium">Trabalho de História</span>
+                            <span class="text-sm text-slate-500">20/10/2026</span>
+                        </span>
+                    </label>
+                    <div class="flex gap-2 sm:flex-none">
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+                    </div>
+                </li>
+
+                <li class="bg-white rounded-xl shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <label class="flex items-start gap-3 min-w-0">
+                        <input type="checkbox" class="mt-1 w-5 h-5 shrink-0">
+                        <span class="min-w-0">
+                            <span class="block font-medium">Estudar para a prova de Matemática</span>
+                            <span class="text-sm text-slate-500">22/10/2026</span>
+                        </span>
+                    </label>
+                    <div class="flex gap-2 sm:flex-none">
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+                    </div>
+                </li>
+
+                <li class="bg-white rounded-xl shadow p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <label class="flex items-start gap-3 min-w-0">
+                        <input type="checkbox" checked class="mt-1 w-5 h-5 shrink-0">
+                        <span class="min-w-0">
+                            <!-- ACABAMENTO: texto riscado e cinza da tarefa concluída. -->
+                            <span class="block font-medium line-through text-slate-400">Entregar projeto no GitHub</span>
+                            <span class="text-sm text-slate-500">08/10/2026</span>
+                        </span>
+                    </label>
+                    <div class="flex gap-2 sm:flex-none">
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+                        <button type="button" class="flex-1 sm:flex-none px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+                    </div>
+                </li>
+            </ul>
+
+            <p class="mt-4 text-sm text-slate-500">2 tarefas pendentes</p>
+        </section>
+    </main>
+</body>
+</html>
